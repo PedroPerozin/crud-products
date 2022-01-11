@@ -1,4 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { config } from 'dotenv';
+
+config() 
 
 const dbTestConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -35,5 +38,6 @@ const dbConfig: TypeOrmModuleOptions = {
 };
 
 export const typeOrmConfig = (): TypeOrmModuleOptions => {
+  console.log(dbConfig)
   return process.env.NODE_ENV === 'test' ? dbTestConfig : dbConfig;
 };

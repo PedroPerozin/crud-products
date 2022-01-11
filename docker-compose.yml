@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  postgres:
+    container_name: boilerplate_postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    networks:
+      - app-network
+    volumes:
+      - ./.docker/pgdata:/var/lib/postgresql
+
+  boilerplate_postgres_test:
+    container_name: boilerplate_postgres_test
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5433:5432
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -51,8 +51,6 @@ CREATE TABLE public.products (
 
 );
 -- ddl-end --
-
-
 ALTER TABLE public.products OWNER TO admin_projeto;
 -- ddl-end --
 ALTER TABLE public.products ADD CONSTRAINT fk_user_products FOREIGN KEY (userid)

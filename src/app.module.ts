@@ -7,7 +7,6 @@ import { AppService } from './app.service';
 import { typeOrmConfig } from './config';
 import { UserModule } from './user/user.module';
 import { ProductsModule } from './products/products.module';
-import { AuthModule } from './src/auth/auth.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({

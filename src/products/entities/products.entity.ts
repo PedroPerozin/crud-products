@@ -4,7 +4,6 @@ import { Index } from 'typeorm/decorator/Index';
 import { BaseEntity } from '../../common/entities/base.entity';
 
 @Index('pk_products', ['id'], { unique: true })
-@Index('fk_user_products', ['userId'], {})
 @Entity('products', { schema: 'public' })
 export class ProductsEntity extends BaseEntity {
   @Column('character varying', { name: 'name', length: 200 })

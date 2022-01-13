@@ -46,7 +46,7 @@ CREATE TABLE public.products (
 	updateddate timestamp with time zone,
 	deleteddate timestamp with time zone,
     name varchar(30) NOT NULL,
-    price float NOT NULL,
+    price numeric (10,2) NOT NULL,
     CONSTRAINT pk_products PRIMARY KEY (id)
 
 );

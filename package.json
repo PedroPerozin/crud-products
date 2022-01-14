@@ -32,7 +32,7 @@
     "@nestjs/typeorm": "^8.0.2",
     "@types/bcrypt-nodejs": "^0.0.31",
     "bcryptjs": "^2.4.3",
-    "class-transformer": "^0.5.1",
+    "class-transformer": "0.4.0",
     "class-validator": "^0.13.2",
     "config": "^3.3.7",
     "dotenv": "^11.0.0",

@@ -4,8 +4,8 @@
 -- Project Site: pgmodeler.io
 -- Model Author: ---
 -- object: admin_projeto | type: ROLE --
--- DROP ROLE IF EXISTS admin_projeto;
--- CREATE ROLE admin_projeto WITH ;
+DROP ROLE IF EXISTS admin_projeto;
+CREATE ROLE admin_projeto WITH SUPERUSER ENCRYPTED PASSWORD 'softo123';
 -- ddl-end --
 
 

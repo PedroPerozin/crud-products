@@ -1,20 +1,24 @@
 import { UserEntity } from 'src/user/entities/user.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { Index } from 'typeorm/decorator/Index';
 import { BaseEntity } from '../../common/entities/base.entity';
 
 @Index('pk_products', ['id'], { unique: true })
 @Entity('products', { schema: 'public' })
-export class ProductsEntity extends BaseEntity {
+export class ProductEntity extends BaseEntity {
   @Column('character varying', { name: 'name', length: 200 })
   name: string;
 
   @Column('character varying', { name: 'price' })
-  price: Float32Array;
+  price: number;
 
-  @Column('character varying', { name: 'email', length: 300 })
-  email: string;
+  @Column('uuid', { name: 'userid' })
+  userId: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.products)
+  @ManyToOne(() => UserEntity, (user) => user.products, {
+    onUpdate: 'RESTRICT',
+    onDelete: 'RESTRICT',
+  })
+  @JoinColumn([{ name: 'userid', referencedColumnName: 'id' }])
   user: UserEntity;
 }

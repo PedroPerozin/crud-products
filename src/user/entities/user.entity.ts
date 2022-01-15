@@ -1,5 +1,5 @@
-import { ProductsEntity } from 'src/products/entities/products.entity';
-import { Column, Entity, Index, OneToMany } from 'typeorm';
+import { ProductEntity } from 'src/products/entities/product.entity';
+import { Column, Entity, Index, JoinColumn, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../common/entities/base.entity';
 
 @Index('pk_users', ['id'], { unique: true })
@@ -17,6 +17,6 @@ export class UserEntity extends BaseEntity {
   @Column('character varying', { name: 'passwordhash', nullable: true })
   passwordHash: string | null;
 
-  @OneToMany(() => ProductsEntity, (products) => products.user)
-  products: ProductsEntity[];
+  @OneToMany(() => ProductEntity, (products) => products.user)
+  products: ProductEntity[];
 }

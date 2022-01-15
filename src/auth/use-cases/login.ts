@@ -13,13 +13,13 @@ export class Login implements ILogin {
   ) {}
 
   async exec(params: ILogin.Params): ILogin.Response {
+    console.log(params);
     const { email } = params;
     const foundUser = await this.getUserByParam.exec({
       param: 'email',
       value: email,
     });
-
-    // { email: params.email }
+    console.log(foundUser);
     if (!foundUser) {
       throw new InvalidCredentialsException();
     }
@@ -31,6 +31,7 @@ export class Login implements ILogin {
       throw new InvalidCredentialsException();
     }
     const payload = { id: foundUser.id, name: foundUser.firstName };
+    console.log(payload);
     const accessToken = this.jwtService.sign(payload);
     return { accessToken };
   }

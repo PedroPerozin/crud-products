@@ -1,8 +1,7 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
-import { TestScheduler } from 'rxjs/testing';
+
 import { CreateUserDto } from '../dto/create-user';
 import { ResponseCreateUserDto } from '../dto/response-create-user';
-import { UserEntity } from '../entities/user.entity';
 import { CreateUser } from '../use-cases/create-user';
 
 @Controller('create')

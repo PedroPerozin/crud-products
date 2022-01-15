@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
 import { ICreateUser } from '../contracts/create-user';
-import { UserEntity } from '../entities/user.entity';
-import { EmailAlreadyExistsException } from '../exception/conflict-exception';
+import { EmailAlreadyExistsException } from '../exceptions/conflict-exception';
 import { UserRepository } from '../user.repository';
-import { GetUserByEmail } from './get-user-by-email';
+import { GetUserByParam } from './get-user-by-param';
 import { HashPassword } from './hash-password';
 
 @Injectable()
@@ -13,19 +13,19 @@ export class CreateUser implements ICreateUser {
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
     private hashPassword: HashPassword,
-    private getUserByEmail: GetUserByEmail,
+    private getUserByParams: GetUserByParam,
   ) {}
 
   async exec(params: ICreateUser.Params): ICreateUser.Response {
     const { firstName, lastName, email, password } = params;
 
-    const userEmail = await this.getUserByEmail.exec({ email });
+    const userEmail = await this.getUserByParams.exec({
+      param: 'email',
+      value: email,
+    });
     if (userEmail) {
       throw new EmailAlreadyExistsException();
     }
-
-    // const userEntity = new UserEntity()
-    // userEntity.firstName = firstName
 
     const user = this.userRepository.create({
       firstName,

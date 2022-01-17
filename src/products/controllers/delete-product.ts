@@ -17,7 +17,6 @@ export class DeleteProductController {
       id,
       user: req.user,
     });
-    console.log(result);
     return result;
   }
 }

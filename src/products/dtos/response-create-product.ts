@@ -8,6 +8,9 @@ export class ResponseCreateProductDto extends BaseDto {
   @Expose()
   price: number;
 
+  @Expose()
+  id: string;
+
   @Expose({
     name: 'product',
   })

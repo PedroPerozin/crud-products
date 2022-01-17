@@ -1,5 +1,5 @@
 import { UserEntity } from 'src/user/entities/user.entity';
-import { CreateProductDto } from '../dto/create-product';
+import { CreateProductDto } from '../dtos/create-product';
 import { ProductEntity } from '../entities/product.entity';
 
 export interface ICreateProducts {

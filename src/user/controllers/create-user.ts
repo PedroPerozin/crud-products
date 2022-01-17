@@ -1,7 +1,7 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 
-import { CreateUserDto } from '../dto/create-user';
-import { ResponseCreateUserDto } from '../dto/response-create-user';
+import { CreateUserDto } from '../dtos/create-user';
+import { ResponseCreateUserDto } from '../dtos/response-create-user';
 import { CreateUser } from '../use-cases/create-user';
 
 @Controller('create')

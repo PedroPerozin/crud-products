@@ -8,8 +8,8 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-import { CreateProductDto } from '../dto/create-product';
-import { ResponseCreateProductDto } from '../dto/response-create-product';
+import { CreateProductDto } from '../dtos/create-product';
+import { ResponseCreateProductDto } from '../dtos/response-create-product';
 import { CreateProduct } from '../use-case/create-product';
 
 @Controller('/products')

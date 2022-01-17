@@ -38,6 +38,5 @@ const dbConfig: TypeOrmModuleOptions = {
 };
 
 export const typeOrmConfig = (): TypeOrmModuleOptions => {
-  // console.log(dbConfig)
   return process.env.NODE_ENV === 'test' ? dbTestConfig : dbConfig;
 };

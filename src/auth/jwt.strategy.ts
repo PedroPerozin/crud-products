@@ -17,8 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: JwtPayload): Promise<{ user: UserEntity }> {
-    console.log(payload);
+  async validate(payload: JwtPayload): Promise<UserEntity> {
     const user = await this.getUserByParam.exec({
       param: 'id',
       value: payload.id,
@@ -26,7 +25,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UserNotFoundException();
     }
-    console.log(user);
-    return { user };
+    return user;
   }
 }

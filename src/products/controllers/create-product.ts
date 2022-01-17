@@ -21,12 +21,11 @@ export class CreateProductController {
   async create(
     @Request() req,
     @Body(ValidationPipe) createProductDto: CreateProductDto,
-  ) {
-    console.log(req.user);
+  ): Promise<ResponseCreateProductDto> {
     const result = await this.createProduct.exec({
       ...createProductDto,
       user: req.user,
     });
-    return result;
+    return ResponseCreateProductDto.factory(ResponseCreateProductDto, result);
   }
 }

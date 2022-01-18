@@ -5,7 +5,7 @@ import { UserEntity } from 'src/user/entities/user.entity';
 import { UserNotFoundException } from 'src/user/exceptions/user-not-found';
 import { GetUserByParam } from 'src/user/use-cases/get-user-by-param';
 
-import { JwtPayload } from './type/jwtPayload';
+import { JwtPayload } from './types/jwtPayload';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -24,6 +24,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
     if (!user) {
       throw new UserNotFoundException();
+      //TODO trocar para toke não valido
     }
     return user;
   }

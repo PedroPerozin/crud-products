@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UserEntity } from 'src/user/entities/user.entity';
+import { TokenUnauthorizedException } from 'src/user/exceptions/token-invalid';
 import { UserNotFoundException } from 'src/user/exceptions/user-not-found';
 import { GetUserByParam } from 'src/user/use-cases/get-user-by-param';
 
@@ -23,8 +24,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       value: payload.id,
     });
     if (!user) {
-      throw new UserNotFoundException();
-      //TODO trocar para toke não valido
+      throw new TokenUnauthorizedException();
     }
     return user;
   }

@@ -10,14 +10,4 @@ export class ResponseUpdateProductDto extends BaseDto {
 
   @Expose()
   id: string;
-
-  @Expose()
-  userId: string;
-
-  @Expose({
-    name: 'newProduct',
-  })
-  updateProduct() {
-    return `Novo produto: ${this.name} - Valor ${this.price}`;
-  }
 }

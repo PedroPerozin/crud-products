@@ -9,7 +9,7 @@ export class UpdateProductDto {
   @IsNotEmpty()
   price: number;
 
-  @IsUUID()
-  @IsNotEmpty()
-  id: string;
+  // @IsUUID()
+  // @IsNotEmpty()
+  // id: string;
 }

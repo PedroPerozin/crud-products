@@ -3,31 +3,25 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CreateProductController } from './controllers/create-product';
 import { DeleteProductController } from './controllers/delete-producct';
-import { ReadProductController } from './controllers/read-products';
+import { ReadProductController } from './controllers/list-products';
 import { UpdateProductController } from './controllers/update-product';
 import { ProductRepository } from './product.repository';
 import { CreateProduct } from './use-case/create-product';
 import { DeleteProduct } from './use-case/delete-product';
 import { GetProductByParam } from './use-case/get-product-by-params';
-import { ReadProduct } from './use-case/read-products';
+import { ListProduct } from './use-case/list-products';
 import { UpdateProduct } from './use-case/update-product';
 
 @Module({
-  imports: [ProductsModule, TypeOrmModule.forFeature([ProductRepository])],
+  imports: [TypeOrmModule.forFeature([ProductRepository])],
   providers: [
     CreateProduct,
     GetProductByParam,
     UpdateProduct,
     DeleteProduct,
-    ReadProduct,
+    ListProduct,
   ],
-  exports: [
-    CreateProduct,
-    GetProductByParam,
-    UpdateProduct,
-    DeleteProduct,
-    ReadProduct,
-  ],
+  exports: [],
   controllers: [
     CreateProductController,
     UpdateProductController,

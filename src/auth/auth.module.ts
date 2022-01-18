@@ -5,6 +5,7 @@ import { UserModule } from 'src/user/user.module';
 import { LoginController } from './controllers/login';
 import { JwtStrategy } from './jwt.strategy';
 import { Login } from './use-cases/login';
+import { ValidatePassword } from './use-cases/validate-password';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { Login } from './use-cases/login';
     UserModule,
   ],
   controllers: [LoginController],
-  providers: [Login, JwtStrategy],
+  providers: [Login, JwtStrategy, ValidatePassword],
 })
 export class AuthModule {}

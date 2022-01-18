@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsNumber, IsPositive } from 'class-validator';
 
-export class ReadProductDto {
+export class ListProductDto {
   @IsPositive()
   @IsNumber()
   @Type(() => Number)

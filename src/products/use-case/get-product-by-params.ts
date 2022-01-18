@@ -1,6 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { IGetProductByParam } from '../contracts/get-products-by-param';
+import { ProductNotFoundException } from '../exceptions/product-not-found';
 import { ProductRepository } from '../product.repository';
 
 export class GetProductByParam implements IGetProductByParam {
@@ -13,6 +14,12 @@ export class GetProductByParam implements IGetProductByParam {
     const foundProduct = await this.productRepository.findOne({
       where: { [param]: value },
     });
+
+    if (!foundProduct) {
+      throw new ProductNotFoundException();
+    }
+
     return foundProduct;
   }
 }
+// TODO -> buscar pelo usuário

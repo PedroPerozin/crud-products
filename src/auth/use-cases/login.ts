@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { ILogin } from '../contracts/login';
-import { compareSync } from 'bcryptjs';
-import { JwtService } from '@nestjs/jwt';
-import { InvalidCredentialsException } from '../exceptions/invalid.credentials';
 import { GetUserByParam } from 'src/user/use-cases/get-user-by-param';
+
+import { ILogin } from '../contracts/login';
+import { InvalidCredentialsException } from '../exceptions/invalid.credentials';
+import { GenerateSignInCredentials } from './generate-login-credentials';
+import { ValidatePassword } from './validate-password';
 
 @Injectable()
 export class Login implements ILogin {
   constructor(
     private getUserByParam: GetUserByParam,
-    private jwtService: JwtService,
+    private validatePassword: ValidatePassword,
+    private generateSignInCredentials: GenerateSignInCredentials,
   ) {}
 
   async exec(params: ILogin.Params): ILogin.Response {
@@ -21,15 +23,12 @@ export class Login implements ILogin {
     if (!foundUser) {
       throw new InvalidCredentialsException();
     }
-    const isPasswordValid = compareSync(
-      params.password,
-      foundUser.passwordHash,
-    );
-    if (!isPasswordValid) {
-      throw new InvalidCredentialsException();
-    }
-    const payload = { id: foundUser.id, name: foundUser.firstName };
-    const accessToken = this.jwtService.sign(payload);
-    return { accessToken };
+
+    await this.validatePassword.exec({
+      password: params.password,
+      hash: foundUser.passwordHash,
+    });
+
+    return this.generateSignInCredentials.exec({ user: foundUser });
   }
 }

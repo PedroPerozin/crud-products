@@ -1,15 +1,8 @@
-import {
-  Body,
-  Controller,
-  Post,
-  UseGuards,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { LoginDto } from 'src/user/dto/login';
-import { ILogin } from '../contracts/login';
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
+import { ILogin } from '../contracts/login';
+import { LoginDto } from '../dtos/login';
 import { Login } from '../use-cases/login';
 
 @ApiTags('auth')

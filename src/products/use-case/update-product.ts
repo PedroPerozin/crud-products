@@ -11,9 +11,9 @@ export class UpdateProduct implements IUpdateProduct {
   ) {}
 
   async exec(params: IUpdateProduct.Params): IUpdateProduct.Response {
-    const { name, price, user } = params;
+    const { name, price, user, id } = params;
 
-    const product = await this.productRepository.findOne({ user });
+    const product = await this.productRepository.findOne({ user, id });
     if (!product) {
       throw new ProductNotFoundException();
     }

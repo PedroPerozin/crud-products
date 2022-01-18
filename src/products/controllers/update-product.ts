@@ -25,6 +25,7 @@ export class UpdateProductController {
     updateProductDto: UpdateProductDto,
   ): Promise<ResponseUpdateProductDto> {
     const result = await this.updateProduct.exec({
+      id,
       ...updateProductDto,
       user: req.user,
     });

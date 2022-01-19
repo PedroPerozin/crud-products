@@ -1,3 +1,4 @@
+import { UserEntity } from 'src/user/entities/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
 import { ProductEntity } from './entities/product.entity';
@@ -7,10 +8,26 @@ export class ProductRepository extends Repository<ProductEntity> {
   async readProduct(
     pageSize: number,
     page: number,
+    name?: string,
+    price?: number,
+    userId?: string,
   ): Promise<[ProductEntity[], number]> {
     const query = this.createQueryBuilder('products');
     query.skip((page - 1) * pageSize);
     query.take(pageSize);
+
+    if (userId) {
+      query.where('products.userid =:userId', { userId });
+    }
+
+    if (name) {
+      query.andWhere('products.name ilike :name', { name: `%${name}%` });
+    }
+
+    if (price) {
+      query.andWhere('products.price =:price', { price });
+    }
+
     return query.getManyAndCount();
   }
 }

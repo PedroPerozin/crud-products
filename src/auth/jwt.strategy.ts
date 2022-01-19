@@ -3,7 +3,6 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { TokenUnauthorizedException } from 'src/user/exceptions/token-invalid';
-import { UserNotFoundException } from 'src/user/exceptions/user-not-found';
 import { GetUserByParam } from 'src/user/use-cases/get-user-by-param';
 
 import { JwtPayload } from './types/jwtPayload';

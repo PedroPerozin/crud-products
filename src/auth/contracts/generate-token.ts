@@ -6,6 +6,6 @@ export interface IGenerateToken {
 }
 
 export namespace IGenerateToken {
-  export type Params = { payload: JwtPayload; options?: JwtSignOptions };
+  export type Params = { payload: JwtPayload };
   export type Response = string;
 }

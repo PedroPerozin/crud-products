@@ -7,7 +7,7 @@ export class GenerateToken implements IGenerateToken {
   constructor(private jwtService: JwtService) {}
 
   exec(params: IGenerateToken.Params): IGenerateToken.Response {
-    const { payload, options } = params;
-    return this.jwtService.sign(payload, options);
+    const { payload } = params;
+    return this.jwtService.sign(payload);
   }
 }

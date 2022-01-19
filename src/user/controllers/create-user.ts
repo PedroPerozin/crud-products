@@ -16,7 +16,3 @@ export class CreateUserController {
     return ResponseCreateUserDto.factory(ResponseCreateUserDto, result);
   }
 }
-
-// const a = async (paramA: number): Promise<number> => {
-//   return 2;
-// };

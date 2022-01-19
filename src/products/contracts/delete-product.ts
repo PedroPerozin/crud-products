@@ -7,5 +7,5 @@ export interface IDeleteProduct {
 
 export namespace IDeleteProduct {
   export type Params = DeleteProductDto & { user: UserEntity };
-  export type Response = Promise<{ message: string }>;
+  export type Response = Promise<void>;
 }

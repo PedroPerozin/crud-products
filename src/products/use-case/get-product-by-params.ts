@@ -10,9 +10,9 @@ export class GetProductByParam implements IGetProductByParam {
     private productRepository: ProductRepository,
   ) {}
   async exec(params: IGetProductByParam.Params): IGetProductByParam.Response {
-    const { param, value } = params;
+    const { param, value, userId } = params;
     const foundProduct = await this.productRepository.findOne({
-      where: { [param]: value },
+      where: { [param]: value, userId },
     });
 
     if (!foundProduct) {
@@ -22,4 +22,3 @@ export class GetProductByParam implements IGetProductByParam {
     return foundProduct;
   }
 }
-// TODO -> buscar pelo usuário

@@ -1,3 +1,4 @@
+import { UserEntity } from 'src/user/entities/user.entity';
 import { ProductEntity } from '../entities/product.entity';
 
 export interface IGetProductByParam {
@@ -8,6 +9,7 @@ export namespace IGetProductByParam {
   export type Params = {
     param: string;
     value: string;
+    userId: string;
   };
   export type Response = Promise<ProductEntity>;
 }

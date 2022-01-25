@@ -1,7 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { IUpdateProduct } from '../contracts/update-product';
-import { ProductNotFoundException } from '../exceptions/product-not-found';
 import { ProductRepository } from '../product.repository';
 import { GetProductByParam } from './get-product-by-params';
 

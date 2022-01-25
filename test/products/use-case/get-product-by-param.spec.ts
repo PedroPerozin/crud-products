@@ -1,9 +1,9 @@
 import { mock } from 'jest-mock-extended';
-import { MockOpts, MockProxy } from 'jest-mock-extended/lib/Mock';
+import { MockProxy } from 'jest-mock-extended/lib/Mock';
+
 import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
 import { ProductRepository } from '../../../src/products/product.repository';
 import { GetProductByParam } from '../../../src/products/use-case/get-product-by-params';
-import { UserEntityGenerator } from '../../user/generators/user-entity-generator';
 import { ProductEntityGenerator } from '../generators/product-entity-generator';
 
 describe('GetProductByParam', () => {
@@ -19,7 +19,7 @@ describe('GetProductByParam', () => {
   const params = { param: 'name', value: 'product', userId: 'id' };
   const { param, value, userId } = params;
 
-  it('should return a ProductNotFoundException if product is not found', async () => {
+  it('should throw an exception ProductNotFoundException if product is not found', async () => {
     mockProductRepository.findOne.mockRejectedValueOnce(
       new ProductNotFoundException(),
     );

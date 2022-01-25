@@ -1,4 +1,3 @@
-import { JwtSignOptions } from '@nestjs/jwt';
 import { JwtPayload } from '../types/jwtPayload';
 
 export interface IGenerateToken {

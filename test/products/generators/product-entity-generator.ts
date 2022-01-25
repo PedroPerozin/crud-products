@@ -9,11 +9,11 @@ const productEntityGenerator = (
 ): ProductEntity => {
   const productEntity = new ProductEntity();
   productEntity.id = uuid();
-  productEntity.alternativeId = faker.random.number(999);
+  productEntity.alternativeId = faker.datatype.number(999);
   productEntity.userId = params?.userId || uuid();
   productEntity.createdDate = new Date();
   productEntity.name = faker.commerce.productName();
-  productEntity.price = faker.random.number(999);
+  productEntity.price = faker.datatype.number(999);
 
   return productEntity;
 };

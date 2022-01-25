@@ -13,7 +13,6 @@ export class DeleteProduct implements IDeleteProduct {
 
   async exec(params: IDeleteProduct.Params): IDeleteProduct.Response {
     const { id, user } = params;
-
     const product = await this.getProductByParam.exec({
       param: 'id',
       value: id,

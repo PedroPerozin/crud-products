@@ -6,7 +6,7 @@ import { BaseGenerator, IGenerated } from '../../generators/base-generator';
 const userEntityGenerator = (): UserEntity => {
   const userEntity = new UserEntity();
   userEntity.id = uuid();
-  userEntity.alternativeId = faker.random.number(999);
+  userEntity.alternativeId = faker.datatype.number(999);
   userEntity.createdDate = new Date();
   userEntity.firstName = faker.name.firstName();
   userEntity.lastName = faker.name.lastName();

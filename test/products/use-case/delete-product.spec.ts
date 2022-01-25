@@ -1,35 +1,74 @@
-import { mock } from 'jest-mock-extended';
-import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
+import { mock, MockProxy } from 'jest-mock-extended';
 
+import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
 import { ProductRepository } from '../../../src/products/product.repository';
 import { DeleteProduct } from '../../../src/products/use-case/delete-product';
 import { GetProductByParam } from '../../../src/products/use-case/get-product-by-params';
-import { UserEntity } from '../../../src/user/entities/user.entity';
+import { UserEntityGenerator } from '../../user/generators/user-entity-generator';
 import { ProductEntityGenerator } from '../generators/product-entity-generator';
 
 describe('DeleteProduct', () => {
-  const mockProductRepository = mock<ProductRepository>();
-  const mockGetProductByParam = mock<GetProductByParam>();
+  let mockProductRepository: MockProxy<ProductRepository>;
+  let mockGetProductByParam: MockProxy<GetProductByParam>;
 
-  const sut = new DeleteProduct(mockProductRepository, mockGetProductByParam);
+  let sut: DeleteProduct;
 
-  it('should delete a existing product with success', async () => {
-    const { item: product } = ProductEntityGenerator.generate();
+  beforeEach(() => {
+    mockProductRepository = mock();
+    mockGetProductByParam = mock();
 
+    sut = new DeleteProduct(mockProductRepository, mockGetProductByParam);
+  });
+  const { item: user } = UserEntityGenerator.generate();
+  const { item: product } = ProductEntityGenerator.generate();
+
+  const params = { id: product.id, user };
+
+  it('should throw error if softDelete method throws', async () => {
     mockGetProductByParam.exec.mockResolvedValueOnce(product);
-    mockGetProductByParam.exec.mockRejectedValueOnce(ProductNotFoundException);
+    mockProductRepository.softDelete.mockRejectedValueOnce(new Error());
+    await expect(sut.exec(params)).rejects.toThrow(Error);
 
-    // add no generator
-    const params = { id: product.id, user: new UserEntity() };
-
-    // const resultado = await sut.exec(params);
-
-    await expect(sut.exec(params)).resolves.toBeUndefined();
     expect(mockGetProductByParam.exec).toHaveBeenCalledWith({
       param: 'id',
       value: params.id,
       userId: params.user.id,
     });
+    expect(mockGetProductByParam.exec).toHaveBeenCalledTimes(1);
+
+    expect(mockProductRepository.softDelete).toHaveBeenCalledWith(params.id);
+    expect(mockProductRepository.softDelete).toHaveBeenCalledTimes(1);
+  });
+
+  it('should throw ProductNotFoundException if product not found', async () => {
+    mockGetProductByParam.exec.mockRejectedValueOnce(
+      new ProductNotFoundException(),
+    );
+
+    await expect(sut.exec(params)).rejects.toThrow(ProductNotFoundException);
+
+    expect(mockGetProductByParam.exec).toHaveBeenCalledWith({
+      param: 'id',
+      value: params.id,
+      userId: params.user.id,
+    });
+    expect(mockGetProductByParam.exec).toHaveBeenCalledTimes(1);
+  });
+
+  it('should delete a existing product with success', async () => {
+    mockGetProductByParam.exec.mockResolvedValueOnce(product);
+    // mockGetProductByParam.exec.mockRejectedValueOnce(ProductNotFoundException);
+
+    await expect(sut.exec(params)).resolves.toBeUndefined();
+
+    expect(mockGetProductByParam.exec).toHaveBeenCalledWith({
+      param: 'id',
+      value: params.id,
+      userId: params.user.id,
+    });
+    expect(mockGetProductByParam.exec).toHaveBeenCalledTimes(1);
+
     expect(mockProductRepository.softDelete).toHaveBeenCalledWith(product.id);
+    expect(mockProductRepository.softDelete).toHaveBeenCalledTimes(1);
   });
 });

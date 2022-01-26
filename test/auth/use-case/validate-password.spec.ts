@@ -18,9 +18,7 @@ describe('ValidatePassword', () => {
   const params = { password: 'password', hash: 'hash' };
 
   it('should throw InvalidCredentialsException if password is not valid', async () => {
-    mockCompareSyncBcrypt.mockRejectedValueOnce(
-      new InvalidCredentialsException(),
-    );
+    mockCompareSyncBcrypt.mockReturnValueOnce(false);
     await expect(sut.exec(params)).rejects.toThrow(InvalidCredentialsException);
 
     expect(mockCompareSyncBcrypt).toHaveBeenCalledWith(

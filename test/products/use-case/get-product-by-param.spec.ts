@@ -20,9 +20,7 @@ describe('GetProductByParam', () => {
   const { param, value, userId } = params;
 
   it('should throw an exception ProductNotFoundException if product is not found', async () => {
-    mockProductRepository.findOne.mockRejectedValueOnce(
-      new ProductNotFoundException(),
-    );
+    mockProductRepository.findOne.mockResolvedValueOnce(null);
     await expect(sut.exec(params)).rejects.toThrow(ProductNotFoundException);
 
     expect(mockProductRepository.findOne).toHaveBeenCalledWith({

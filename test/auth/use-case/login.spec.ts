@@ -33,9 +33,7 @@ describe('Login', () => {
   };
 
   it('should throw InvalidCredentialsException if user with provided was not found', async () => {
-    mockGetUserByParam.exec.mockRejectedValueOnce(
-      new InvalidCredentialsException(),
-    );
+    mockGetUserByParam.exec.mockResolvedValueOnce(null);
     await expect(sut.exec(params)).rejects.toThrow(InvalidCredentialsException);
 
     expect(mockGetUserByParam.exec).toHaveBeenCalledWith({

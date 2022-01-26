@@ -1,7 +1,7 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { ILogin } from '../contracts';
 
-import { ILogin } from '../contracts/login';
 import { LoginDto } from '../dtos/login';
 import { Login } from '../use-cases/login';
 

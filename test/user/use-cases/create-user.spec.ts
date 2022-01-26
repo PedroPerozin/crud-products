@@ -1,9 +1,11 @@
 import { mock, MockProxy } from 'jest-mock-extended';
+import { EmailAlreadyExistsException } from '../../../src/user/exceptions';
+import {
+  HashPassword,
+  GetUserByParam,
+  CreateUser,
+} from '../../../src/user/use-cases';
 
-import { EmailAlreadyExistsException } from '../../../src/user/exceptions/conflict-exception';
-import { CreateUser } from '../../../src/user/use-cases/create-user';
-import { GetUserByParam } from '../../../src/user/use-cases/get-user-by-param';
-import { HashPassword } from '../../../src/user/use-cases/hash-password';
 import { UserRepository } from '../../../src/user/user.repository';
 import { UserEntityGenerator } from '../generators/user-entity-generator';
 

@@ -1,16 +1,17 @@
 import {
   Body,
-  Request,
   Controller,
+  Param,
+  ParseUUIDPipe,
   Put,
+  Request,
   UseGuards,
   ValidationPipe,
-  ParseUUIDPipe,
-  Param,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { ResponseUpdateProductDto } from '../dtos/response-update-products';
-import { UpdateProductDto } from '../dtos/update-product';
+
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { UpdateProductDto, ResponseUpdateProductDto } from '../dtos';
+
 import { UpdateProduct } from '../use-case/update-product';
 
 @Controller('/products')

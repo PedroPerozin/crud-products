@@ -1,9 +1,10 @@
-import { mock, MockProxy } from 'jest-mock-extended';
+import { MockProxy, mock } from 'jest-mock-extended';
 import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
-
 import { ProductRepository } from '../../../src/products/product.repository';
-import { GetProductByParam } from '../../../src/products/use-case/get-product-by-params';
-import { UpdateProduct } from '../../../src/products/use-case/update-product';
+import {
+  GetProductByParam,
+  UpdateProduct,
+} from '../../../src/products/use-case';
 import { UserEntityGenerator } from '../../user/generators/user-entity-generator';
 import { ProductEntityGenerator } from '../generators/product-entity-generator';
 

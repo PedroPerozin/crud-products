@@ -2,8 +2,10 @@ import { mock, MockProxy } from 'jest-mock-extended';
 
 import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
 import { ProductRepository } from '../../../src/products/product.repository';
-import { DeleteProduct } from '../../../src/products/use-case/delete-product';
-import { GetProductByParam } from '../../../src/products/use-case/get-product-by-params';
+import {
+  DeleteProduct,
+  GetProductByParam,
+} from '../../../src/products/use-case';
 import { UserEntityGenerator } from '../../user/generators/user-entity-generator';
 import { ProductEntityGenerator } from '../generators/product-entity-generator';
 

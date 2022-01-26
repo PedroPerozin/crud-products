@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
+import { IGetProductByParam } from '../contracts';
 
-import { IGetProductByParam } from '../contracts/get-products-by-param';
 import { ProductNotFoundException } from '../exceptions/product-not-found';
 import { ProductRepository } from '../product.repository';
 

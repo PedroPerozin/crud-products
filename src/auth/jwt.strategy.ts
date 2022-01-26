@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { UserEntity } from 'src/user/entities/user.entity';
-import { TokenUnauthorizedException } from 'src/user/exceptions/token-invalid';
-import { GetUserByParam } from 'src/user/use-cases/get-user-by-param';
+import { UserEntity } from '../user/entities/user.entity';
+import { TokenUnauthorizedException } from './exceptions/token-invalid';
+import { GetUserByParam } from '../user/use-cases/get-user-by-param';
 
 import { JwtPayload } from './types/jwtPayload';
 

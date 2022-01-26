@@ -3,7 +3,7 @@ import { MockProxy } from 'jest-mock-extended/lib/Mock';
 
 import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
 import { ProductRepository } from '../../../src/products/product.repository';
-import { GetProductByParam } from '../../../src/products/use-case/get-product-by-params';
+import { GetProductByParam } from '../../../src/products/use-case';
 import { ProductEntityGenerator } from '../generators/product-entity-generator';
 
 describe('GetProductByParam', () => {

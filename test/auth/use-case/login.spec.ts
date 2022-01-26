@@ -1,5 +1,5 @@
 import { mock, MockProxy } from 'jest-mock-extended';
-import { InvalidCredentialsException } from '../../../src/auth/exceptions/invalid.credentials';
+import { InvalidCredentialsException } from '../../../src/auth/exceptions';
 import { GenerateSignInCredentials } from '../../../src/auth/use-cases/generate-login-credentials';
 import { Login } from '../../../src/auth/use-cases/login';
 import { ValidatePassword } from '../../../src/auth/use-cases/validate-password';

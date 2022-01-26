@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { IFilterProduct } from '../contracts/list-product';
+import { IFilterProduct } from '../contracts';
 import { ProductRepository } from '../product.repository';
 
 export class ListProduct implements IFilterProduct {

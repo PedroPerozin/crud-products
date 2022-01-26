@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
+import { IUpdateProduct } from '../contracts';
 
-import { IUpdateProduct } from '../contracts/update-product';
 import { ProductRepository } from '../product.repository';
 import { GetProductByParam } from './get-product-by-params';
 

@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
+import { ICreateProducts } from '../contracts';
 
-import { ICreateProducts } from '../contracts/create-product';
 import { ProductRepository } from '../product.repository';
 
 export class CreateProduct implements ICreateProducts {

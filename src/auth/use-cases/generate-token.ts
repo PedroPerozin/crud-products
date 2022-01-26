@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IGenerateToken } from '../contracts/generate-token';
+import { IGenerateToken } from '../contracts';
 
 @Injectable()
 export class GenerateToken implements IGenerateToken {

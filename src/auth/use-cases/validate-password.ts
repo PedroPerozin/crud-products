@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { compareSync } from 'bcryptjs';
-
-import { IValidatePassword } from '../contracts/validate-password';
-import { InvalidCredentialsException } from '../exceptions/invalid.credentials';
+import { IValidatePassword } from '../contracts';
+import { InvalidCredentialsException } from '../exceptions';
 
 @Injectable()
 export class ValidatePassword implements IValidatePassword {

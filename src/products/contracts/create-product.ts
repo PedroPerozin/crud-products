@@ -1,4 +1,4 @@
-import { UserEntity } from 'src/user/entities/user.entity';
+import { UserEntity } from '../../user/entities/user.entity';
 import { CreateProductDto } from '../dtos/create-product';
 import { ProductEntity } from '../entities/product.entity';
 

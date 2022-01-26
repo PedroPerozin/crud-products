@@ -1,7 +1,7 @@
 import { mock } from 'jest-mock-extended';
 import { ProductEntity } from '../../../src/products/entities/product.entity';
 import { ProductRepository } from '../../../src/products/product.repository';
-import { ListProduct } from '../../../src/products/use-case/list-products';
+import { ListProduct } from '../../../src/products/use-case';
 import { UserEntityGenerator } from '../../user/generators/user-entity-generator';
 import { ProductEntityGenerator } from '../generators/product-entity-generator';
 

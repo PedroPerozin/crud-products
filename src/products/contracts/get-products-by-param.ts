@@ -1,4 +1,3 @@
-import { UserEntity } from 'src/user/entities/user.entity';
 import { ProductEntity } from '../entities/product.entity';
 
 export interface IGetProductByParam {

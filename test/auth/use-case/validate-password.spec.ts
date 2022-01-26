@@ -1,5 +1,5 @@
 import { compareSync } from 'bcryptjs';
-import { InvalidCredentialsException } from '../../../src/auth/exceptions/invalid.credentials';
+import { InvalidCredentialsException } from '../../../src/auth/exceptions';
 import { ValidatePassword } from '../../../src/auth/use-cases/validate-password';
 
 jest.mock('bcryptjs');

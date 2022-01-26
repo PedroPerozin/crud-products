@@ -11,10 +11,10 @@ import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { DeleteProduct } from '../use-case/delete-product';
 
 @Controller('/products')
+@UseGuards(JwtAuthGuard)
 export class DeleteProductController {
   constructor(private deleteProduct: DeleteProduct) {}
 
-  @UseGuards(JwtAuthGuard)
   @Delete('/delete/:id')
   async remove(@Request() req, @Param('id', ParseUUIDPipe) id: string) {
     const result = await this.deleteProduct.exec({

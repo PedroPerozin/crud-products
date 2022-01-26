@@ -15,9 +15,9 @@ import { UpdateProductDto, ResponseUpdateProductDto } from '../dtos';
 import { UpdateProduct } from '../use-case/update-product';
 
 @Controller('/products')
+@UseGuards(JwtAuthGuard)
 export class UpdateProductController {
   constructor(private updateProduct: UpdateProduct) {}
-  @UseGuards(JwtAuthGuard)
   @Put('/update/:id')
   async update(
     @Request() req,

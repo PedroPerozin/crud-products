@@ -1,30 +1,28 @@
 import {
-  INestApplication,
   HttpStatus,
+  INestApplication,
   UnauthorizedException,
 } from '@nestjs/common';
-import { TestingModule, Test } from '@nestjs/testing';
-import { Connection } from 'typeorm';
-import { AppModule } from '../../../src/app.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as faker from 'faker';
-import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
+import * as request from 'supertest';
+import { Connection } from 'typeorm';
+
+import { AppModule } from '../../../src/app.module';
 import { ProductEntity } from '../../../src/products/entities/product.entity';
+import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
 import { UserEntity } from '../../../src/user/entities/user.entity';
 
 describe('@PUT /products/update', () => {
   let app: INestApplication;
   let connection: Connection;
   let token: string;
-  const baseUrl = `/products/update`;
+  const baseUrl = `/products/update/44db805d-7ac3-4a28-85f1-9a907e1eeb63`;
+  const wrongIdBaseUrl = `/products/update/44db805d-7ac3-4a28-85f1-9a947e1eeb63`;
   const productParams = {
     name: `${faker.commerce.productName()}`,
     price: 55,
   };
-
-  const id = `44db805d-7ac3-4a28-85f1-9a907e1eeb63`;
-  const wrongProductId = `44db805d-7ac3-4a28-85f1-9a947e1eeb63`;
-
   const paramsLogin = {
     id: '1d7b054b-2d78-4f16-a72d-3eae28c1deaa',
     email: 'admin@sof.to',
@@ -55,16 +53,14 @@ describe('@PUT /products/update', () => {
 
   it('should return Unauthorized if user does not authenticate', async () => {
     await request(app.getHttpServer())
-      .put(`${baseUrl}/${id}`)
+      .put(baseUrl)
       .send(productParams)
       .expect(({ status, body }) => {
         expect(status).toBe(HttpStatus.UNAUTHORIZED);
         expect(body.message).toStrictEqual(new UnauthorizedException().message);
       });
   });
-  // fazer o caso se o usuário for deletado antes de att
   it('should return Unauthorized if no jwt token is provided but user not exist', async () => {
-    // excluir o user (colocar uma data no delete), depois voltar ele (retornar null na data)
     await connection
       .createQueryBuilder()
       .update(UserEntity)
@@ -74,7 +70,7 @@ describe('@PUT /products/update', () => {
       .where('id =:id', { id: paramsLogin.id })
       .execute();
     await request(app.getHttpServer())
-      .put(`${baseUrl}/${id}`)
+      .put(baseUrl)
       .send(productParams)
       .expect(({ status, body }) => {
         expect(status).toBe(HttpStatus.UNAUTHORIZED);
@@ -93,7 +89,7 @@ describe('@PUT /products/update', () => {
 
   it('should return BadRequest if data provided not pass on validate', async () => {
     await request(app.getHttpServer())
-      .put(`${baseUrl}/${id}`)
+      .put(baseUrl)
       .auth(token, { type: 'bearer' })
       .send()
       .expect(({ status, body }) => {
@@ -109,7 +105,7 @@ describe('@PUT /products/update', () => {
 
   it('should return ProductNotFoundException if uuid is wrong', async () => {
     await request(app.getHttpServer())
-      .put(`${baseUrl}/${wrongProductId}`)
+      .put(wrongIdBaseUrl)
       .auth(token, { type: 'bearer' })
       .send(productParams)
       .expect(({ status, body }) => {
@@ -123,7 +119,7 @@ describe('@PUT /products/update', () => {
   it('should update a product on success  ', async () => {
     let productId: string;
     await request(app.getHttpServer())
-      .put(`${baseUrl}/${id}`)
+      .put(baseUrl)
       .auth(token, { type: 'bearer' })
       .send(productParams)
       .expect(({ status, body }) => {

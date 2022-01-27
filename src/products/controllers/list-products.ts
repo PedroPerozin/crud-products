@@ -1,9 +1,9 @@
 import { Controller, Get, Query, Request, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
-import { PaginatedResults } from '../../common/dtos/paginated-results.dto';
+import { PaginatedResults } from '../../common/dtos';
 import { FilterProductDto, ResponseReadProductsDto } from '../dtos';
-import { ListProduct } from '../use-case/list-products';
+import { ListProduct } from '../use-case';
 
 @Controller('products')
 @UseGuards(JwtAuthGuard)

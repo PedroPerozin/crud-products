@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsNumberString, IsOptional, IsString, IsUUID } from 'class-validator';
-import { QueryPaginatedDto } from '../../common/dtos/query-paginated.dto';
+import { QueryPaginatedDto } from '../../common/dtos';
 
 export class FilterProductDto extends QueryPaginatedDto {
   @IsOptional()

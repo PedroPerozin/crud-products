@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { IGenerateSignInCredentials } from '../contracts';
 
+import { IGenerateSignInCredentials } from '../contracts';
 import { GenerateToken } from './generate-token';
 
 @Injectable()

@@ -6,10 +6,10 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
+
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { CreateProductDto, ResponseCreateProductDto } from '../dtos';
-
-import { CreateProduct } from '../use-case/create-product';
+import { CreateProduct } from '../use-case';
 
 @Controller('/products')
 @UseGuards(JwtAuthGuard)

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { GetUserByParam } from '../../user/use-cases/get-user-by-param';
+import { GetUserByParam } from '../../user/use-cases';
+
 import { ILogin } from '../contracts';
 import { InvalidCredentialsException } from '../exceptions';
-
 import { GenerateSignInCredentials } from './generate-login-credentials';
 import { ValidatePassword } from './validate-password';
 

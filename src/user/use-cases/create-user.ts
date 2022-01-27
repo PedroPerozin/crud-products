@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
 import { ICreateUser } from '../contracts';
 import { EmailAlreadyExistsException } from '../exceptions';
-
 import { UserRepository } from '../user.repository';
 import { GetUserByParam } from './get-user-by-param';
 import { HashPassword } from './hash-password';

@@ -10,9 +10,8 @@ import {
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
-import { UpdateProductDto, ResponseUpdateProductDto } from '../dtos';
-
-import { UpdateProduct } from '../use-case/update-product';
+import { ResponseUpdateProductDto, UpdateProductDto } from '../dtos';
+import { UpdateProduct } from '../use-case';
 
 @Controller('/products')
 @UseGuards(JwtAuthGuard)

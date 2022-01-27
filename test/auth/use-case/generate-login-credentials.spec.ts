@@ -1,6 +1,8 @@
 import { mock, MockProxy } from 'jest-mock-extended';
-import { GenerateSignInCredentials } from '../../../src/auth/use-cases/generate-login-credentials';
-import { GenerateToken } from '../../../src/auth/use-cases/generate-token';
+import {
+  GenerateSignInCredentials,
+  GenerateToken,
+} from '../../../src/auth/use-cases';
 import { UserEntityGenerator } from '../../user/generators/user-entity-generator';
 
 describe('GenerateSignInCredentials', () => {

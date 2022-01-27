@@ -1,7 +1,6 @@
 import {
   HttpStatus,
   INestApplication,
-  InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';

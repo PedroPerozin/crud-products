@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { genSaltSync, hashSync } from 'bcryptjs';
+
 import { IHashPassword } from '../contracts';
 
 @Injectable()

@@ -6,9 +6,9 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 
-import { DeleteProduct } from '../use-case/delete-product';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { DeleteProduct } from '../use-case';
 
 @Controller('/products')
 @UseGuards(JwtAuthGuard)

@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { BaseDto } from '../../common/dtos/base.dto';
+import { BaseDto } from '../../common/dtos';
 
 export class ResponseUpdateProductDto extends BaseDto {
   @Expose()

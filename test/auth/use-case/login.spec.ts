@@ -1,9 +1,11 @@
 import { mock, MockProxy } from 'jest-mock-extended';
 import { InvalidCredentialsException } from '../../../src/auth/exceptions';
-import { GenerateSignInCredentials } from '../../../src/auth/use-cases/generate-login-credentials';
-import { Login } from '../../../src/auth/use-cases/login';
-import { ValidatePassword } from '../../../src/auth/use-cases/validate-password';
-import { GetUserByParam } from '../../../src/user/use-cases/get-user-by-param';
+import {
+  ValidatePassword,
+  GenerateSignInCredentials,
+  Login,
+} from '../../../src/auth/use-cases';
+import { GetUserByParam } from '../../../src/user/use-cases';
 import { UserEntityGenerator } from '../../user/generators/user-entity-generator';
 
 describe('Login', () => {

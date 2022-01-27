@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { IGetUserByParam } from '../contracts';
 
+import { IGetUserByParam } from '../contracts';
 import { UserRepository } from '../user.repository';
 
 export class GetUserByParam implements IGetUserByParam {

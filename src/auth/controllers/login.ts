@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { ILogin } from '../contracts';
 import { LoginDto } from '../dtos/login';
-import { Login } from '../use-cases/login';
+import { Login } from '../use-cases';
 
 @ApiTags('auth')
 @Controller('auth')

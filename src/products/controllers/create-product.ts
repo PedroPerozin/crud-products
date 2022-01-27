@@ -12,10 +12,10 @@ import { CreateProductDto, ResponseCreateProductDto } from '../dtos';
 import { CreateProduct } from '../use-case/create-product';
 
 @Controller('/products')
+@UseGuards(JwtAuthGuard)
 export class CreateProductController {
   constructor(private createProduct: CreateProduct) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post('/create')
   async create(
     @Request() req,

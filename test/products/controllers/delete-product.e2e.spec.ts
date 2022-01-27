@@ -8,6 +8,7 @@ import * as request from 'supertest';
 import { Connection } from 'typeorm';
 
 import { AppModule } from '../../../src/app.module';
+import { TokenUnauthorizedException } from '../../../src/auth/exceptions';
 import { ProductEntity } from '../../../src/products/entities/product.entity';
 import { ProductNotFoundException } from '../../../src/products/exceptions/product-not-found';
 import { UserEntity } from '../../../src/user/entities/user.entity';
@@ -70,10 +71,13 @@ describe('@DELETE /product/delete', () => {
 
     await request(app.getHttpServer())
       .delete(baseUrl)
+      .auth(token, { type: 'bearer' })
       .send(id)
       .expect(({ status, body }) => {
         expect(status).toBe(HttpStatus.UNAUTHORIZED);
-        expect(body.message).toStrictEqual(new UnauthorizedException().message);
+        expect(body.message).toStrictEqual(
+          new TokenUnauthorizedException().message,
+        );
       });
 
     await connection

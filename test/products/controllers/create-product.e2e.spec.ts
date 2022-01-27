@@ -7,6 +7,7 @@ import { TestingModule, Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { Connection } from 'typeorm';
 import { AppModule } from '../../../src/app.module';
+import { TokenUnauthorizedException } from '../../../src/auth/exceptions';
 import { ProductEntity } from '../../../src/products/entities/product.entity';
 import { UserEntity } from '../../../src/user/entities/user.entity';
 
@@ -33,7 +34,6 @@ describe('@POST /products/create', () => {
       .send(paramsLogin)
       .expect(({ status, body }) => {
         expect(status).toBe(HttpStatus.CREATED);
-        // console.log(body);
         token = body.accessToken;
       });
 
@@ -48,7 +48,6 @@ describe('@POST /products/create', () => {
     await request(app.getHttpServer())
       .post(baseUrl)
       .expect(({ status, body }) => {
-        // console.log(body);
         expect(status).toBe(HttpStatus.UNAUTHORIZED);
         expect(body.message).toStrictEqual(new UnauthorizedException().message);
       });
@@ -64,13 +63,14 @@ describe('@POST /products/create', () => {
       })
       .where('id =:id', { id: paramsLogin.id })
       .execute();
-    // console.log(users);
     await request(app.getHttpServer())
       .post(baseUrl)
+      .auth(token, { type: 'bearer' })
       .expect(({ status, body }) => {
-        console.log(body);
         expect(status).toBe(HttpStatus.UNAUTHORIZED);
-        expect(body.message).toStrictEqual(new UnauthorizedException().message);
+        expect(body.message).toStrictEqual(
+          new TokenUnauthorizedException().message,
+        );
       });
 
     await connection
@@ -88,7 +88,6 @@ describe('@POST /products/create', () => {
       .post(baseUrl)
       .auth(token, { type: 'bearer' })
       .expect(({ status, body }) => {
-        // console.log(body);
         expect(status).toBe(HttpStatus.BAD_REQUEST);
         expect(body.message).toStrictEqual([
           'name should not be empty',
@@ -108,7 +107,6 @@ describe('@POST /products/create', () => {
       .send(params)
       .expect(({ status, body }) => {
         expect(status).toBe(HttpStatus.CREATED);
-        // console.log(body);
         productId = body.id;
         expect(body.id).toBeDefined();
         expect(body.name).toBe(params.name);
@@ -122,7 +120,6 @@ describe('@POST /products/create', () => {
       .from(ProductEntity, 'products')
       .where('products.id =:productId', { productId })
       .execute();
-    console.log(product);
     // tenho que verificar se o que foi enviado é igual ao que foi salvo (testar db)
 
     expect(product.name).toBe(params.name);

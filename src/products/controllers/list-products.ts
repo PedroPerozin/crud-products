@@ -11,10 +11,7 @@ export class ReadProductController {
   constructor(private listProduct: ListProduct) {}
 
   @Get('/read')
-  async handleReadProduct(
-    @Request() req,
-    @Query() filterProductDto: FilterProductDto,
-  ) {
+  async handleReadProduct(@Query() filterProductDto: FilterProductDto) {
     const { page, pageSize } = filterProductDto;
     const [products, count] = await this.listProduct.exec({
       ...filterProductDto,

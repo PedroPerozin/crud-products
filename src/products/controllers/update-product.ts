@@ -6,7 +6,6 @@ import {
   Put,
   Request,
   UseGuards,
-  ValidationPipe,
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
@@ -21,7 +20,7 @@ export class UpdateProductController {
   async update(
     @Request() req,
     @Param('id', ParseUUIDPipe) id: string,
-    @Body(ValidationPipe)
+    @Body()
     updateProductDto: UpdateProductDto,
   ): Promise<ResponseUpdateProductDto> {
     const result = await this.updateProduct.exec({

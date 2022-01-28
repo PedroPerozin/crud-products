@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
-import { IsNumberString, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
+
 import { QueryPaginatedDto } from '../../common/dtos';
 
 export class FilterProductDto extends QueryPaginatedDto {
@@ -8,7 +9,7 @@ export class FilterProductDto extends QueryPaginatedDto {
   name?: string;
 
   @IsOptional()
-  @IsNumberString()
+  @IsNumber()
   @Type(() => Number)
   price?: number;
 

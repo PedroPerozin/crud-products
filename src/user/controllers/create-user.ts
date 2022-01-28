@@ -1,4 +1,4 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 
 import { CreateUserDto, ResponseCreateUserDto } from '../dtos';
 import { CreateUser } from '../use-cases';
@@ -9,7 +9,7 @@ export class CreateUserController {
 
   @Post('/user')
   async create(
-    @Body(ValidationPipe) createUserDto: CreateUserDto,
+    @Body() createUserDto: CreateUserDto,
   ): Promise<ResponseCreateUserDto> {
     const result = await this.createUser.exec(createUserDto);
     return ResponseCreateUserDto.factory(ResponseCreateUserDto, result);

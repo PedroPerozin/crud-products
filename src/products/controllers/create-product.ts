@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Post,
-  Request,
-  UseGuards,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { CreateProductDto, ResponseCreateProductDto } from '../dtos';
@@ -19,7 +12,7 @@ export class CreateProductController {
   @Post('/create')
   async create(
     @Request() req,
-    @Body(ValidationPipe) createProductDto: CreateProductDto,
+    @Body() createProductDto: CreateProductDto,
   ): Promise<ResponseCreateProductDto> {
     const result = await this.createProduct.exec({
       ...createProductDto,

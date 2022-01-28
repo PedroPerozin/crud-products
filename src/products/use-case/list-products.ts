@@ -9,14 +9,6 @@ export class ListProduct implements IFilterProduct {
   ) {}
 
   async exec(params: IFilterProduct.Params): IFilterProduct.Response {
-    const { pageSize, page, name, price, userId } = params;
-
-    return this.productRepository.readProduct(
-      pageSize,
-      page,
-      name,
-      price,
-      userId,
-    );
+    return this.productRepository.readProduct({ ...params });
   }
 }

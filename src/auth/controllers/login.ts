@@ -1,4 +1,4 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { ILogin } from '../contracts';
@@ -11,7 +11,7 @@ export class LoginController {
   constructor(private loginService: Login) {}
 
   @Post('/sign-in')
-  async login(@Body(ValidationPipe) loginDto: LoginDto): ILogin.Response {
+  async login(@Body() loginDto: LoginDto): ILogin.Response {
     return this.loginService.exec(loginDto);
   }
 }

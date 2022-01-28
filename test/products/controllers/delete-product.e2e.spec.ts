@@ -2,6 +2,7 @@ import {
   HttpStatus,
   INestApplication,
   UnauthorizedException,
+  ValidationPipe,
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
@@ -32,6 +33,8 @@ describe('@DELETE /product/delete', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(new ValidationPipe({ transform: true }));
+
     await app.init();
 
     await request(app.getHttpServer())

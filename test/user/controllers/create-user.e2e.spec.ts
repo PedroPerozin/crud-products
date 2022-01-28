@@ -1,4 +1,4 @@
-import { INestApplication, HttpStatus } from '@nestjs/common';
+import { INestApplication, HttpStatus, ValidationPipe } from '@nestjs/common';
 import { TestingModule, Test } from '@nestjs/testing';
 import { Connection } from 'typeorm';
 import { AppModule } from '../../../src/app.module';
@@ -30,6 +30,8 @@ describe('@POST /create/user', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(new ValidationPipe({ transform: true }));
+
     await app.init();
 
     connection = app.get(Connection);

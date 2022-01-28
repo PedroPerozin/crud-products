@@ -2,6 +2,7 @@ import {
   HttpStatus,
   INestApplication,
   UnauthorizedException,
+  ValidationPipe,
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as faker from 'faker';
@@ -35,6 +36,8 @@ describe('@PUT /products/update', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(new ValidationPipe({ transform: true }));
+
     await app.init();
 
     await request(app.getHttpServer())

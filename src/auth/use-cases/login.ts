@@ -3,19 +3,23 @@ import { ILogin } from '../contracts/login';
 import { compareSync } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { InvalidCredentialsException } from '../exceptions/invalid.credentials';
-import { UserRepository } from 'src/user/user.repository';
-import { GetUserByEmail } from 'src/user/use-cases/get-user-by-email';
+import { GetUserByParam } from 'src/user/use-cases/get-user-by-param';
 
 @Injectable()
 export class Login implements ILogin {
   constructor(
-    private getUserByEmail: GetUserByEmail,
+    private getUserByParam: GetUserByParam,
     private jwtService: JwtService,
   ) {}
 
   async exec(params: ILogin.Params): ILogin.Response {
-    const foundUser = await this.getUserByEmail.exec({ email: params.email });
+    const { email } = params;
+    const foundUser = await this.getUserByParam.exec({
+      param: 'email',
+      value: email,
+    });
 
+    // { email: params.email }
     if (!foundUser) {
       throw new InvalidCredentialsException();
     }

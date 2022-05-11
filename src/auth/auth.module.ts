@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
-import { Login } from './use-cases/login';
 import { JwtModule } from '@nestjs/jwt';
-import { LoginController } from './controllers/login';
 import { UserModule } from 'src/user/user.module';
+
+import { LoginController } from './controllers/login';
+import { JwtStrategy } from './jwt.strategy';
+import { Login } from './use-cases/login';
+
 @Module({
   imports: [
     JwtModule.register({
@@ -14,6 +17,6 @@ import { UserModule } from 'src/user/user.module';
     UserModule,
   ],
   controllers: [LoginController],
-  providers: [Login],
+  providers: [Login, JwtStrategy],
 })
 export class AuthModule {}

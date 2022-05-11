@@ -1,11 +1,15 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GetUserByEmail } from './use-cases/get-user-by-email';
+import { CreateUserController } from './controllers/create-user';
+import { CreateUser } from './use-cases/create-user';
+import { GetUserByParam } from './use-cases/get-user-by-param';
+import { HashPassword } from './use-cases/hash-password';
 import { UserRepository } from './user.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserRepository])],
-  providers: [GetUserByEmail],
-  exports: [GetUserByEmail],
+  providers: [GetUserByParam, HashPassword, CreateUser],
+  exports: [GetUserByParam, CreateUser],
+  controllers: [CreateUserController],
 })
 export class UserModule {}

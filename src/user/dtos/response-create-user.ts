@@ -11,6 +11,9 @@ export class ResponseCreateUserDto extends BaseDto {
   @Expose()
   email: string;
 
+  @Expose()
+  id: string;
+
   @Expose({
     name: 'fullName',
   })

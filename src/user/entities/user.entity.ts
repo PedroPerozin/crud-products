@@ -1,5 +1,6 @@
 import { ProductEntity } from 'src/products/entities/product.entity';
-import { Column, Entity, Index, JoinColumn, OneToMany } from 'typeorm';
+import { Column, Entity, Index, OneToMany } from 'typeorm';
+
 import { BaseEntity } from '../../common/entities/base.entity';
 
 @Index('pk_users', ['id'], { unique: true })

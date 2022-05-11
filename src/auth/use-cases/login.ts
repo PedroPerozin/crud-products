@@ -18,8 +18,6 @@ export class Login implements ILogin {
       param: 'email',
       value: email,
     });
-
-    // { email: params.email }
     if (!foundUser) {
       throw new InvalidCredentialsException();
     }

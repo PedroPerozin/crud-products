@@ -1,7 +1,7 @@
-import { ProductEntity } from 'src/products/entities/product.entity';
 import { Column, Entity, Index, OneToMany } from 'typeorm';
 
 import { BaseEntity } from '../../common/entities/base.entity';
+import { ProductEntity } from '../../products/entities/product.entity';
 
 @Index('pk_users', ['id'], { unique: true })
 @Entity('users', { schema: 'public' })

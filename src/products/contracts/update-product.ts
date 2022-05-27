@@ -6,6 +6,6 @@ export interface IUpdateProduct {
 }
 
 export namespace IUpdateProduct {
-  export type Params = UpdateProductDto & { user: UserEntity };
+  export type Params = UpdateProductDto & { user: UserEntity } & { id: string };
   export type Response = Promise<UpdateProductDto>;
 }

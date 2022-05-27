@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { UserEntity } from 'src/user/entities/user.entity';
-import { UserNotFoundException } from 'src/user/exceptions/user-not-found';
-import { GetUserByParam } from 'src/user/use-cases/get-user-by-param';
 
-import { JwtPayload } from './type/jwtPayload';
+import { UserEntity } from '../user/entities/user.entity';
+import { GetUserByParam } from '../user/use-cases/get-user-by-param';
+import { TokenUnauthorizedException } from './exceptions/token-invalid';
+import { JwtPayload } from './types/jwtPayload';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       value: payload.id,
     });
     if (!user) {
-      throw new UserNotFoundException();
+      throw new TokenUnauthorizedException();
     }
     return user;
   }

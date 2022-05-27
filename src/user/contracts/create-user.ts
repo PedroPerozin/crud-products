@@ -1,5 +1,6 @@
 import { ConflictException } from '@nestjs/common';
-import { CreateUserDto } from '../dtos/create-user';
+
+import { CreateUserDto } from '../dtos';
 import { UserEntity } from '../entities/user.entity';
 
 export interface ICreateUser {

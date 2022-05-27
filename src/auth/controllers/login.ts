@@ -1,16 +1,9 @@
-import {
-  Body,
-  Controller,
-  Post,
-  UseGuards,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { LoginDto } from 'src/user/dto/login';
-import { ILogin } from '../contracts/login';
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
-import { Login } from '../use-cases/login';
+import { ILogin } from '../contracts';
+import { LoginDto } from '../dtos/login';
+import { Login } from '../use-cases';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -18,7 +11,7 @@ export class LoginController {
   constructor(private loginService: Login) {}
 
   @Post('/sign-in')
-  async login(@Body(ValidationPipe) loginDto: LoginDto): ILogin.Response {
+  async login(@Body() loginDto: LoginDto): ILogin.Response {
     return this.loginService.exec(loginDto);
   }
 }

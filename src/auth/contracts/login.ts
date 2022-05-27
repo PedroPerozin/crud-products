@@ -1,7 +1,6 @@
-import { LoginDto } from 'src/user/dto/login';
+import { LoginDto } from '../dtos/login';
 
 export interface ILogin {
-  // exec: (params: { email: string; password: string }) => Promise<void>;
   exec: (params: ILogin.Params) => ILogin.Response;
 }
 

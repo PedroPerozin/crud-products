@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { UserModule } from 'src/user/user.module';
 
+import { UserModule } from '../user/user.module';
 import { LoginController } from './controllers/login';
 import { JwtStrategy } from './jwt.strategy';
-import { Login } from './use-cases/login';
+import {
+  GenerateSignInCredentials,
+  GenerateToken,
+  Login,
+  ValidatePassword,
+} from './use-cases';
 
 @Module({
   imports: [
@@ -17,6 +22,12 @@ import { Login } from './use-cases/login';
     UserModule,
   ],
   controllers: [LoginController],
-  providers: [Login, JwtStrategy],
+  providers: [
+    Login,
+    JwtStrategy,
+    ValidatePassword,
+    GenerateToken,
+    GenerateSignInCredentials,
+  ],
 })
 export class AuthModule {}

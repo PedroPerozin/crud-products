@@ -8,6 +8,7 @@ export namespace IGetProductByParam {
   export type Params = {
     param: string;
     value: string;
+    userId: string;
   };
   export type Response = Promise<ProductEntity>;
 }

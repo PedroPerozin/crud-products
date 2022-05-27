@@ -1,5 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { IGetUserByParam } from '../contracts/get-user-by-param';
+
+import { IGetUserByParam } from '../contracts';
 import { UserRepository } from '../user.repository';
 
 export class GetUserByParam implements IGetUserByParam {
@@ -9,9 +10,8 @@ export class GetUserByParam implements IGetUserByParam {
   ) {}
   async exec(params: IGetUserByParam.Params): IGetUserByParam.Response {
     const { value, param } = params;
-    const foundUser = await this.userRepository.findOne({
+    return this.userRepository.findOne({
       where: { [param]: value },
     });
-    return foundUser;
   }
 }

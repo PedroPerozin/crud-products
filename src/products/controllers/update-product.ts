@@ -1,26 +1,30 @@
 import {
   Body,
-  Request,
   Controller,
+  Param,
+  ParseUUIDPipe,
   Put,
+  Request,
   UseGuards,
-  ValidationPipe,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { ResponseUpdateProductDto } from '../dtos/response-update-products';
-import { UpdateProductDto } from '../dtos/update-product';
-import { UpdateProduct } from '../use-case/update-product';
+
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { ResponseUpdateProductDto, UpdateProductDto } from '../dtos';
+import { UpdateProduct } from '../use-case';
 
 @Controller('/products')
+@UseGuards(JwtAuthGuard)
 export class UpdateProductController {
   constructor(private updateProduct: UpdateProduct) {}
-  @UseGuards(JwtAuthGuard)
-  @Put('/update')
+  @Put('/update/:id')
   async update(
     @Request() req,
-    @Body(ValidationPipe) updateProductDto: UpdateProductDto,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body()
+    updateProductDto: UpdateProductDto,
   ): Promise<ResponseUpdateProductDto> {
     const result = await this.updateProduct.exec({
+      id,
       ...updateProductDto,
       user: req.user,
     });

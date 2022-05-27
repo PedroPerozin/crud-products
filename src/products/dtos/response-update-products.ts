@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { BaseDto } from 'src/common/dtos/base.dto';
+import { BaseDto } from '../../common/dtos';
 
 export class ResponseUpdateProductDto extends BaseDto {
   @Expose()
@@ -10,14 +10,4 @@ export class ResponseUpdateProductDto extends BaseDto {
 
   @Expose()
   id: string;
-
-  @Expose()
-  userId: string;
-
-  @Expose({
-    name: 'newProduct',
-  })
-  updateProduct() {
-    return `Novo produto: ${this.name} - Valor ${this.price}`;
-  }
 }
